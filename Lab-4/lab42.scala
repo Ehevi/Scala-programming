@@ -66,6 +66,26 @@ object Appl42 {
         goFrom(0)
     }
 
+    def sumAbsArrayIter(elems: Array[Int]) = {
+        var sum = 0
+        for (i <- elems) sum += i.abs
+        sum
+    }
+
+    def sumAbsArrayRec1(i: Int, elems: Array[Int]): Int = {
+        if (i < elems.size) elems(i).abs + sumAbsArrayRec1(i + 1, elems)
+        else 0
+    }
+
+    def sumAbsArrayRec2(elems: Array[Int]) = {
+        val size = elems.size
+        def goFrom(i: Int): Int = {
+            if (i < size) elems(i).abs + goFrom(i + 1)
+            else 0
+        }
+        goFrom(0)
+    }
+
     def main(args: Array[String]) {
         /*
         val a1To5 = (1 to 5).toArray
@@ -80,14 +100,19 @@ object Appl42 {
         checkPredicate(sumSqrArrayIter(a1To5) == expectResult, "sumSqrArrayIter(a1To5) == " + expectResult)
         checkPredicate(sumSqrArrayRec1(0, a1To5) == expectResult, "sumSqrArrayRec1(0, a1To5) == " + expectResult)
         checkPredicate(sumSqrArrayRec2(a1To5) == expectResult, "sumSqrArrayRec2(a1To5) == " + expectResult)
-        */
 
-        val a1To5 = (1 to 5).toArray
         println("Testing with a1To5 = " + a1To5.mkString("Array(", ", ", ") ..."))
         val expectResult = 120
         checkPredicate(prodArrayIter(a1To5) == expectResult, "prodArrayIter(a1To5) == " + expectResult)
         checkPredicate(prodArrayRec1(0, a1To5) == expectResult, "prodArrayRec1(0, a1To5) == " + expectResult)
         checkPredicate(prodArrayRec2(a1To5) == expectResult, "prodArrayRec2(a1To5) == " + expectResult)
-        
+        */
+
+        val aNegative1To5 = (-5 to -1).toArray
+        println("Testing with aNegative1To5 = " + aNegative1To5.mkString("Array(", ", ", ") ..."))
+        val expectResult = 15
+        checkPredicate(sumAbsArrayIter(aNegative1To5) == expectResult, "sumAbsArrayIter(a1To5) == " + expectResult)
+        checkPredicate(sumAbsArrayRec1(0, aNegative1To5) == expectResult, "sumAbsArrayRec1(0, a1To5) == " + expectResult)
+        checkPredicate(sumAbsArrayRec2(aNegative1To5) == expectResult, "sumAbsArrayRec2(a1To5) == " + expectResult)
     }
 }

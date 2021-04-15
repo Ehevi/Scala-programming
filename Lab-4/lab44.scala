@@ -18,7 +18,6 @@ object Appl44 {
 
     def main(args: Array[String]) {
         val recDepth = recurseTest(0, 0, Array(1))
-        println("sumArrayRec2 = " + 
-            sumArrayRec2((0 until recDepth).toArray))
+        println("sumArrayRec2 = " + sumArrayRec2((0 until recDepth).toArray))
     }
 }

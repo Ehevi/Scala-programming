@@ -157,6 +157,11 @@ Uzupełnić brakujące miejsca w pliku [`lab43.scala`](https://github.com/Ehevi/
 ![](pictures/2-5-lab43.png)
 
 ## 3. Rekursja - przepełnienie stosu
+#### Zadanie
+Wyznaczyć maksymalny rozmiar tablicy, który nie powoduje przepełnienia stosu: [`lab44.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab44.scala).
+Czy otrzymany w wyniku powyższego testu rozmiar tablicy jest rzeczywiście maksymalny? Czy otrzymywane w kolejnych uruchomieniach wyniki są takie same?
+![](pictures/3-5-recursion.png)
+
 ## 4. Rekursja “ogonowa”/końcowa, adnotacja *@tailrec*
 ## 5. Usprawnianie procesów rekurencyjnych: “*memoization*“ i wzorzec “*trampolina*“
 ## 6. Odwzorowanie `switch - case` (z Javy) w Scali (wariant z typem wyliczeniowym)

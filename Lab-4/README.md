@@ -152,19 +152,19 @@ def main(args: Array[String]) {
 ![](pictures/2-4-zad-2-sum-abs.png)
 
 #### Zadanie
-Uzupełnić brakujące miejsca w pliku [`lab43.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab43.scala), tak, aby wszystkie testy "przechodziły pozytywnie" (status `OK`); metody mają zwracać element o największej wartości.
+Uzupełnić brakujące miejsca w pliku [`lab43.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab43.scala), tak, aby wszystkie testy "przechodziły pozytywnie" (status `OK`); metody mają zwracać element o największej wartości.
 
 ![](pictures/2-5-lab43.png)
 
 ## 3. Rekursja - przepełnienie stosu
 #### Zadanie
-Wyznaczyć maksymalny rozmiar tablicy, który nie powoduje przepełnienia stosu: [`lab44.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab44.scala).
+Wyznaczyć maksymalny rozmiar tablicy, który nie powoduje przepełnienia stosu: [`lab44.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab44.scala).
 Czy otrzymany w wyniku powyższego testu rozmiar tablicy jest rzeczywiście maksymalny? Czy otrzymywane w kolejnych uruchomieniach wyniki są takie same?
 
 ![](pictures/3-5-recursion.png)
 
 ## 4. Rekursja “ogonowa”/końcowa, adnotacja *@tailrec*
-W pliku [`lab45.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab45.scala) dodać adnotację `@tailrec` w definicji metody `sumArrayRec2`. Przanalizować wynik kompilacji. Czym różnią się metody `sumArrayRec2` i `sumArrayRec3`? Do czego służy parametr `acc`?
+W pliku [`lab45.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab45.scala) dodać adnotację `@tailrec` w definicji metody `sumArrayRec2`. Przanalizować wynik kompilacji. Czym różnią się metody `sumArrayRec2` i `sumArrayRec3`? Do czego służy parametr `acc`?
 
 ![](pictures/4-4-@tailrec.png)
 
@@ -182,7 +182,7 @@ Parametr `acc` przechowuje aktualny wynik wartości obliczanej przez funkcję.
 ![](pictures/4-4-acc.png)
 
 #### Zadanie
-W pliku [`lab42.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab42.scala) dodać metodę `sumSqrArrayRec3` - z rekursją ogonową (dla potwierdzenia poprawności dodać `@tailrec`).
+W pliku [`lab42.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab42.scala) dodać metodę `sumSqrArrayRec3` - z rekursją ogonową (dla potwierdzenia poprawności dodać `@tailrec`).
 
 ```scala
 def sumSqrArrayRec3(elems: Array[Int]) = {
@@ -199,7 +199,7 @@ def sumSqrArrayRec3(elems: Array[Int]) = {
 ![](pictures/4-4-sumSqrArrayRec3.png)
 
 #### Zadanie
-W pliku [`lab41.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab41.scala) dodać nowe wersje `factorial` i `fibb` - z rekursją ogonową (dla potwierdzenia poprawności dodać `@tailrec`).
+W pliku [`lab41.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab41.scala) dodać nowe wersje `factorial` i `fibb` - z rekursją ogonową (dla potwierdzenia poprawności dodać `@tailrec`).
 
 ```scala
 def factorialTailRec(n: Int): Int = {
@@ -226,7 +226,7 @@ def fibbTailRec(n: Int): Int = {
 ```
 
 #### Zadanie
-W pliku [`lab42.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab42.scala) dodać odpowiednie metody (z rekursją ogonową) dla `prodArrayRec3` i `sumArrayRec3`. Dla potwierdzenia poprawności dodać `@tailrec`.
+W pliku [`lab42.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab42.scala) dodać odpowiednie metody (z rekursją ogonową) dla `prodArrayRec3` i `sumArrayRec3`. Dla potwierdzenia poprawności dodać `@tailrec`.
 
 ```scala
 def prodArrayRec3(elems: Array[Int]) = {
@@ -253,18 +253,18 @@ def sumAbsArrayRec3(elems: Array[Int]) = {
 ```
 
 ## 5. Usprawnianie procesów rekurencyjnych: “*memoization*“ i wzorzec “*trampolina*“
-[`lab461.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab461.scala): skąd wynika tak duża różnica w czasie wykonania tych metod?
+[`lab461.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab461.scala): skąd wynika tak duża różnica w czasie wykonania tych metod?
 
 ![](pictures/5-2-appl461.png)
 
 Różnica wynika z wykorzystania przez funkcję `fibCalc` techniki optymalizacyjnej *memoization*. "Ciężkie" obliczeniowo wartości są zapamiętywane i nie muszą być obliczane ponownie, kiedy kolejny raz trzeba z nich skorzystać.
 
 #### Zadanie
-Wyznaczyć maksymalną wartość `n`, która nie powoduje przepełnienia stosu ([`lab462.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab462.scala))
+Wyznaczyć maksymalną wartość `n`, która nie powoduje przepełnienia stosu ([`lab462.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab462.scala))
 
 ![](pictures/5-4-max-n.png)
 
-### Wzorzec "trampolina": ([`lab463.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab463.scala))
+### Wzorzec "trampolina": ([`lab463.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab-files/lab463.scala))
 ![](pictures/5-6-tailcalls.png)
 
 ## 6. Odwzorowanie `switch - case` (z Javy) w Scali (wariant z typem wyliczeniowym)
@@ -359,7 +359,7 @@ object Appl470 {
 ![](pictures/6-4-appl470.png)
 
 
-## 7. [Constant patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/7.%20Constant%20patterns.ipynb) (vs. *variable patterns*)
+## 7. [Constant patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/7.%20Constant%20patterns.ipynb) (vs. *variable patterns*)
 
 ## 8. Constructor patterns
 #### `lab471.scala`:
@@ -436,6 +436,6 @@ object Appl471 {
 }
 ```
 ![](pictures/9-variable-binding.png)
-## 10. [Typed patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/10.%20Typed%20patterns.ipynb)
-## 11. [Typ `Option`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/11.%20Typ%20Option.ipynb)
-## 12. [Ekstraktory](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/11.%20Ekstraktory.ipynb)
+## 10. [Typed patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/10.%20Typed%20patterns.ipynb)
+## 11. [Typ `Option`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/11.%20Typ%20Option.ipynb)
+## 12. [Ekstraktory](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/11.%20Ekstraktory.ipynb)

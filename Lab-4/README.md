@@ -268,9 +268,174 @@ Wyznaczyć maksymalną wartość `n`, która nie powoduje przepełnienia stosu (
 ![](pictures/5-6-tailcalls.png)
 
 ## 6. Odwzorowanie `switch - case` (z Javy) w Scali (wariant z typem wyliczeniowym)
-## 7. Constant patterns (vs. *variable patterns*)
+#### `JavaAppl.java`:
+```java
+class JavaAppl {
+  enum WeekDay {
+    Mon, Tue, Wed, Thu, Fri, Sat, Sun
+  }
+  private static void printDayName(WeekDay day) {
+    switch (day) {
+      case Mon: System.out.println("Monday");
+        break;
+      case Tue: System.out.println("Tuesday");
+        break;
+      case Wed: System.out.println("Wednesday");
+        break;
+      case Thu: System.out.println("Thursday");
+        break;
+      case Fri: System.out.println("Friday");
+        break;
+      case Sat: System.out.println("Saturday");
+        break;
+      case Sun: System.out.println("Sunday");
+        break;
+      default: System.out.println("What the he...?!");
+    }
+  }
+  public static void main(String[] args) {
+    for (WeekDay day : WeekDay.values()) {
+      printDayName(day);
+    }
+  }
+}
+```
+![](pictures/6-1-javaappl.png)
+
+#### `lab470.scala`:
+```scala
+object Appl470 {
+  object WeekDay extends Enumeration {
+    type WeekDay = Value
+    val Mon, Tue, Wed, Thu, Fri, Sat, Sun = Value
+  }
+  
+  import WeekDay._
+  def printDayName(day: WeekDay) = {
+    day match {
+      case Mon => println("Monday")
+      case Tue => println("Tuesday")
+      case Wed => println("Wednesday")
+      case Thu => println("Thursday")
+      case Fri => println("Friday")
+      case Sat => println("Saturday")
+      case Sun => println("Sunday")
+      case _   => println("What the he..?!")
+    }
+  }
+
+  def main(args: Array[String]) {
+    for (day <- WeekDay.values) printDayName(day)
+  }
+}
+```
+![](pictures/6-4-appl470.png)
+
+#### `lab470.scala` (modyfikacja metody `printDayName`):
+```scala
+object Appl470 {
+  object WeekDay extends Enumeration {
+    type WeekDay = Value
+    val Mon, Tue, Wed, Thu, Fri, Sat, Sun = Value
+  }
+  
+  import WeekDay._
+  def printDayName(day: WeekDay) = day match {
+      case Mon => println("Monday")
+      case Tue => println("Tuesday")
+      case Wed => println("Wednesday")
+      case Thu => println("Thursday")
+      case Fri => println("Friday")
+      case Sat => println("Saturday")
+      case Sun => println("Sunday")
+      case _   => println("What the he..?!")
+  }
+
+  def main(args: Array[String]) {
+    for (day <- WeekDay.values) printDayName(day)
+  }
+}
+```
+![](pictures/6-4-appl470.png)
+
+
+## 7. [Constant patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/7.%20Constant%20patterns.ipynb) (vs. *variable patterns*)
+
 ## 8. Constructor patterns
+#### `lab471.scala`:
+```scala
+sealed abstract class Expr
+case class Number(num: Double) extends Expr
+case class UnOp(operator: String, arg: Expr) extends Expr
+case class BinOp(operator: String, left: Expr, right: Expr) 
+extends Expr
+
+object ExprEval {
+  def simplify(e: Expr): Expr = e match {
+    case UnOp("+", Number(num)) => Number(num)
+    case BinOp("+", Number(0), Number(num)) => Number(num)
+    case _ => e
+  }
+  def evaluate(e: Expr): Double = ExprEval.simplify(e) match {
+    case Number(num) => num
+    case BinOp("+", left, right) => evaluate(left) + evaluate(right)
+    case BinOp("-", left, right) => evaluate(left) - evaluate(right)
+    case _ => println("Unmatched expression!"); 0
+  }
+}
+object Appl471 {
+  def main(args: Array[String]) {
+    import ExprEval._
+
+    println(simplify(UnOp("+", Number(10))))
+    println(simplify(BinOp("+", Number(0), Number(32))))
+    println(evaluate(BinOp("+", BinOp("+", Number(1.5), Number(5.5)), Number(3))))
+    println(evaluate(BinOp("+", BinOp("-", Number(11), Number(6)), Number(9))))
+  }
+}
+```
+![](pictures/8-4-lab471.png)
+
 ## 9. Variable binding and pattern guards
-## 10. Typed patterns
-## 11. Typ `Option`
-## 12. Ekstraktory
+#### `lab471.scala`:
+```scala
+sealed abstract class Expr
+case class Number(num: Double) extends Expr
+case class UnOp(operator: String, arg: Expr) extends Expr
+case class BinOp(operator: String, left: Expr, right: Expr) 
+extends Expr
+
+object ExprEval {
+  def simplify(e: Expr): Expr = e match {
+    case UnOp("+", Number(num)) => Number(num)
+    case BinOp("+", Number(0), Number(num)) => Number(num)
+    case UnOp("abs", el @ UnOp("abs", _)) => el
+    case UnOp("abs", Number(num)) if(num >= 0) => Number(num)
+    case UnOp("abs", Number(num)) if(num < 0) => Number(-num)
+    case _ => e
+  }
+  def evaluate(e: Expr): Double = ExprEval.simplify(e) match {
+    case Number(num) => num
+    case BinOp("+", left, right) => evaluate(left) + evaluate(right)
+    case BinOp("-", left, right) => evaluate(left) - evaluate(right)
+    case _ => println("Unmatched expression!"); 0
+  }
+}
+object Appl471 {
+  def main(args: Array[String]) {
+    import ExprEval._
+
+    println(simplify(UnOp("+", Number(10))))
+    println(simplify(BinOp("+", Number(0), Number(32))))
+    println(evaluate(BinOp("+", BinOp("+", Number(1.5), Number(5.5)), Number(3))))
+    println(evaluate(BinOp("+", BinOp("-", Number(11), Number(6)), Number(9))))
+    println(simplify(UnOp("abs", UnOp("abs", Number(10)))))
+    println(simplify(UnOp("abs", Number(10))))
+    println(simplify(UnOp("abs", Number(-10))))
+  }
+}
+```
+![](pictures/9-variable-binding.png)
+## 10. [Typed patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/10.%20Typed%20patterns.ipynb)
+## 11. [Typ `Option`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/11.%20Typ%20Option.ipynb)
+## 12. [Ekstraktory](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/11.%20Ekstraktory.ipynb)

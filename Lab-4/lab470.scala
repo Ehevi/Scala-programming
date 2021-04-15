@@ -3,6 +3,7 @@ object Appl470 {
     type WeekDay = Value
     val Mon, Tue, Wed, Thu, Fri, Sat, Sun = Value
   }
+  
   import WeekDay._
   def printDayName(day: WeekDay) = day match {
       case Mon => println("Monday")
@@ -13,8 +14,9 @@ object Appl470 {
       case Sat => println("Saturday")
       case Sun => println("Sunday")
       case _   => println("What the he..?!")
-    }
+  }
+
   def main(args: Array[String]) {
-    for (day <- WeekDay.values) println(day)
+    for (day <- WeekDay.values) printDayName(day)
   }
 }

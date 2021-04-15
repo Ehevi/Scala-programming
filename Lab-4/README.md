@@ -144,9 +144,9 @@ def main(args: Array[String]) {
     val aNegative1To5 = (-5 to -1).toArray
     println("Testing with aNegative1To5 = " + aNegative1To5.mkString("Array(", ", ", ") ..."))
     val expectResult = 15
-    checkPredicate(sumAbsArrayIter(aNegative1To5) == expectResult, "sumAbsArrayIter(a1To5) == " + expectResult)
-    checkPredicate(sumAbsArrayRec1(0, aNegative1To5) == expectResult, "sumAbsArrayRec1(0, a1To5) == " + expectResult)
-    checkPredicate(sumAbsArrayRec2(aNegative1To5) == expectResult, "sumAbsArrayRec2(a1To5) == " + expectResult)
+    checkPredicate(sumAbsArrayIter(aNegative1To5) == expectResult, "sumAbsArrayIter(aNegative1To5) == " + expectResult)
+    checkPredicate(sumAbsArrayRec1(0, aNegative1To5) == expectResult, "sumAbsArrayRec1(0, aNegative1To5) == " + expectResult)
+    checkPredicate(sumAbsArrayRec2(aNegative1To5) == expectResult, "sumAbsArrayRec2(aNegative1To5) == " + expectResult)
 }
 ```
 ![](pictures/2-4-zad-2-sum-abs.png)
@@ -160,9 +160,94 @@ Uzupełnić brakujące miejsca w pliku [`lab43.scala`](https://github.com/Ehevi/
 #### Zadanie
 Wyznaczyć maksymalny rozmiar tablicy, który nie powoduje przepełnienia stosu: [`lab44.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab44.scala).
 Czy otrzymany w wyniku powyższego testu rozmiar tablicy jest rzeczywiście maksymalny? Czy otrzymywane w kolejnych uruchomieniach wyniki są takie same?
+
 ![](pictures/3-5-recursion.png)
 
 ## 4. Rekursja “ogonowa”/końcowa, adnotacja *@tailrec*
+W pliku [`lab45.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab45.scala) dodać adnotację `@tailrec` w definicji metody `sumArrayRec2`. Przanalizować wynik kompilacji. Czym różnią się metody `sumArrayRec2` i `sumArrayRec3`? Do czego służy parametr `acc`?
+
+![](pictures/4-4-@tailrec.png)
+Metoda `sumArrayRec3` wykorzystuje rekurencję ogonową. Ostatnia operacja wykonywana przez funkcję to rekurencyjne wywołanie samej siebie (lub zwrócenie końcowego wyniku). Pozwala to kompilatorowi na jej optymalizację poprzez zastąpienie tego wywołania funkcji instrukcją skoku: rekurencja zastępowana jest iteracją. W ten sposób rekurencyjne wywołanie może korzystać z istniejącej już ramki, przez co zapotrzebowanie na stos maleje z liniowego O(n) do stałego O(1). W konsekwencji znacząco zredukowane jest ryzyko przepełnienia stosu (*stack overflow*). Wyraźnie zwiększa to wydajność działania.
+
+W metodzie `sumArrayRec2` rekurencyjne wywołanie funckji nie jest jej ostatnią instrukcją, przez co nie spełnia ona warunków optymalizacji ogonowej.
+(https://www.scala-lang.org/api/2.12.3/scala/annotation/tailrec.html)
+![](pictures/4-4-tailrec-lab-45.png)
+![](pictures/4-4-tailrec.png)
+
+Parametr `acc` przechowuje aktualny wynik wartości obliczanej przez funkcję.
+![](pictures/4-4-acc.png)
+
+#### Zadanie
+W pliku [`lab42.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab42.scala) dodać metodę `sumSqrArrayRec3` - z rekursją ogonową (dla potwierdzenia poprawności dodać `@tailrec`).
+
+```scala
+def sumSqrArrayRec3(elems: Array[Int]) = {
+    val size = elems.size
+    @tailrec
+    def goFrom(i: Int, acc: Int): Int = {
+        if(i < size) goFrom(i + 1, acc + pow(elems(i), 2).intValue)
+        else acc
+    }
+    goFrom(0, 0)
+}
+```
+
+![](pictures/4-4-sumSqrArrayRec3.png)
+
+#### Zadanie
+W pliku [`lab41.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab41.scala) dodać nowe wersje `factorial` i `fibb` - z rekursją ogonową (dla potwierdzenia poprawności dodać `@tailrec`).
+
+```scala
+def factorialTailRec(n: Int): Int = {
+  assert(n >= 0)
+  @tailrec
+  def goFrom(i: Int, acc: Int): Int = {
+    if(i == 0 || i == 1) acc
+    else goFrom(i - 1, i * acc)
+  }
+  goFrom(n, 1)
+}
+```
+
+```scala
+def fibbTailRec(n: Int): Int = {
+  assert(n >= 0)
+  @tailrec
+  def goFrom(i: Int, prev: Int, current: Int): Int = {
+    if(i == 0) current
+    else goFrom(i - 1, prev + current, prev)
+  }
+  goFrom(n, 1, 0)
+}
+```
+
+#### Zadanie
+W pliku [`lab42.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab42.scala) dodać odpowiednie metody (z rekursją ogonową) dla `prodArrayRec3` i `sumArrayRec3`. Dla potwierdzenia poprawności dodać `@tailrec`.
+
+```scala
+def prodArrayRec3(elems: Array[Int]) = {
+    val size = elems.size
+    @tailrec
+    def goFrom(i: Int, acc: Int): Int = {
+        if(i < size) goFrom(i + 1, acc * elems(i))
+        else acc
+    }
+    goFrom(0, 1)
+}
+```
+
+```scala
+def sumAbsArrayRec3(elems: Array[Int]) = {
+    val size = elems.size
+    @tailrec
+    def goFrom(i: Int, acc: Int): Int = {
+        if (i < size) goFrom(i + 1, acc + elems(i).abs)
+        else acc
+    }
+    goFrom(0, 0)
+}
+```
+
 ## 5. Usprawnianie procesów rekurencyjnych: “*memoization*“ i wzorzec “*trampolina*“
 ## 6. Odwzorowanie `switch - case` (z Javy) w Scali (wariant z typem wyliczeniowym)
 ## 7. Constant patterns (vs. *variable patterns*)

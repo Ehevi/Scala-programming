@@ -2,6 +2,7 @@ object Appl45 {
   import scala.annotation.tailrec
 
   def sumArrayRec2(elems: Array[Int]) = {
+    // @tailrec
     def goFrom(i: Int, size: Int, elms: Array[Int]): Int = {
       if (i < size) elms(i) + goFrom(i + 1, size, elms)
       else 0
@@ -11,10 +12,7 @@ object Appl45 {
 
   def sumArrayRec3(elems: Array[Int]) = {
     @tailrec
-    def goFrom(i: Int,
-               size: Int,
-               elms: Array[Int],
-               acc: Int): Int = {
+    def goFrom(i: Int, size: Int, elms: Array[Int], acc: Int): Int = {
       if (i < size) goFrom(i + 1, size, elms, acc + elms(i))
       else acc
     }
@@ -22,7 +20,6 @@ object Appl45 {
   }
 
   def main(args: Array[String]) {
-    println("sumArrayRec3 = " +
-            sumArrayRec3((0 until 30000).toArray))
+    println("sumArrayRec3 = " + sumArrayRec3((0 until 30000).toArray))
   }
 }

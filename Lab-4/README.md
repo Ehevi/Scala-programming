@@ -152,7 +152,9 @@ def main(args: Array[String]) {
 ![](pictures/2-4-zad-2-sum-abs.png)
 
 #### Zadanie
-uzupełnić brakujące miejsca w pliku `lab43.scala` tak, aby wszystkie testy przechodziły pozytywnie; metody mają zwracać element o największej wartości.
+Uzupełnić brakujące miejsca w pliku [`lab43.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab43.scala), tak, aby wszystkie testy "przechodziły pozytywnie" (status `OK`); metody mają zwracać element o największej wartości.
+
+![](pictures/2-5-lab43.png)
 
 ## 3. Rekursja - przepełnienie stosu
 ## 4. Rekursja “ogonowa”/końcowa, adnotacja *@tailrec*

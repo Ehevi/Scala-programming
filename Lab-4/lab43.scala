@@ -1,7 +1,5 @@
 object Appl43 {
-    def checkPredicate(pred: Boolean,
-                        predAsString: String,
-                        prefix: String = "Checking if ") {
+    def checkPredicate(pred: Boolean, predAsString: String, prefix: String = "Checking if ") {
         if (pred) println(prefix + predAsString + ": OK")
         else println(prefix + predAsString + ": Fail")
     }
@@ -27,14 +25,10 @@ object Appl43 {
     
     def main(args: Array[String]) {
         val arr1 = Array(3, 12, 43, 4, 10)
-        println("Testing with arr1 = " +
-                arr1.mkString("Array(", ", ", ") ..."))
+        println("Testing with arr1 = " + arr1.mkString("Array(", ", ", ") ..."))
         val expectResult = 43
-        checkPredicate(maxIter(arr1) == expectResult,
-                    "maxIter(arr1) == " + expectResult)
-        checkPredicate(maxRec1(0, arr1(0), arr1) == expectResult,
-                    "maxRec1(0,arr1(0), arr1) == " + expectResult)
-        checkPredicate(maxRec2(arr1) == expectResult,
-                    "maxRec2(arr1) == " + expectResult)
+        checkPredicate(maxIter(arr1) == expectResult, "maxIter(arr1) == " + expectResult)
+        checkPredicate(maxRec1(0, arr1(0), arr1) == expectResult, "maxRec1(0,arr1(0), arr1) == " + expectResult)
+        checkPredicate(maxRec2(arr1) == expectResult, "maxRec2(arr1) == " + expectResult)
     }
 }

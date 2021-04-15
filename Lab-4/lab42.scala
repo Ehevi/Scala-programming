@@ -87,7 +87,6 @@ object Appl42 {
     }
 
     def main(args: Array[String]) {
-        /*
         val a1To5 = (1 to 5).toArray
         println("Testing with a1To5 = " + a1To5.mkString("Array(", ", ", ") ..."))
         val expectResult = 15
@@ -106,7 +105,6 @@ object Appl42 {
         checkPredicate(prodArrayIter(a1To5) == expectResult, "prodArrayIter(a1To5) == " + expectResult)
         checkPredicate(prodArrayRec1(0, a1To5) == expectResult, "prodArrayRec1(0, a1To5) == " + expectResult)
         checkPredicate(prodArrayRec2(a1To5) == expectResult, "prodArrayRec2(a1To5) == " + expectResult)
-        */
 
         val aNegative1To5 = (-5 to -1).toArray
         println("Testing with aNegative1To5 = " + aNegative1To5.mkString("Array(", ", ", ") ..."))

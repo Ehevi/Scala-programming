@@ -438,4 +438,4 @@ object Appl471 {
 ![](pictures/9-variable-binding.png)
 ## 10. [Typed patterns](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/10.%20Typed%20patterns.ipynb)
 ## 11. [Typ `Option`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/11.%20Typ%20Option.ipynb)
-## 12. [Ekstraktory](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/11.%20Ekstraktory.ipynb)
+## 12. [Ekstraktory](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/notebooks/12.%20Ekstraktory.ipynb)

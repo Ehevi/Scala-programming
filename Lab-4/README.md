@@ -167,14 +167,18 @@ Czy otrzymany w wyniku powyższego testu rozmiar tablicy jest rzeczywiście maks
 W pliku [`lab45.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab45.scala) dodać adnotację `@tailrec` w definicji metody `sumArrayRec2`. Przanalizować wynik kompilacji. Czym różnią się metody `sumArrayRec2` i `sumArrayRec3`? Do czego służy parametr `acc`?
 
 ![](pictures/4-4-@tailrec.png)
+
+(https://www.scala-lang.org/api/2.12.3/scala/annotation/tailrec.html)
+
 Metoda `sumArrayRec3` wykorzystuje rekurencję ogonową. Ostatnia operacja wykonywana przez funkcję to rekurencyjne wywołanie samej siebie (lub zwrócenie końcowego wyniku). Pozwala to kompilatorowi na jej optymalizację poprzez zastąpienie tego wywołania funkcji instrukcją skoku: rekurencja zastępowana jest iteracją. W ten sposób rekurencyjne wywołanie może korzystać z istniejącej już ramki, przez co zapotrzebowanie na stos maleje z liniowego O(n) do stałego O(1). W konsekwencji znacząco zredukowane jest ryzyko przepełnienia stosu (*stack overflow*). Wyraźnie zwiększa to wydajność działania.
 
 W metodzie `sumArrayRec2` rekurencyjne wywołanie funckji nie jest jej ostatnią instrukcją, przez co nie spełnia ona warunków optymalizacji ogonowej.
-(https://www.scala-lang.org/api/2.12.3/scala/annotation/tailrec.html)
+
 ![](pictures/4-4-tailrec-lab-45.png)
 ![](pictures/4-4-tailrec.png)
 
 Parametr `acc` przechowuje aktualny wynik wartości obliczanej przez funkcję.
+
 ![](pictures/4-4-acc.png)
 
 #### Zadanie
@@ -249,6 +253,20 @@ def sumAbsArrayRec3(elems: Array[Int]) = {
 ```
 
 ## 5. Usprawnianie procesów rekurencyjnych: “*memoization*“ i wzorzec “*trampolina*“
+[`lab461.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab461.scala): skąd wynika tak duża różnica w czasie wykonania tych metod?
+
+![](pictures/5-2-appl461.png)
+
+Różnica wynika z wykorzystania przez funkcję `fibCalc` techniki optymalizacyjnej *memoization*. "Ciężkie" obliczeniowo wartości są zapamiętywane i nie muszą być obliczane ponownie, kiedy kolejny raz trzeba z nich skorzystać.
+
+#### Zadanie
+Wyznaczyć maksymalną wartość `n`, która nie powoduje przepełnienia stosu ([`lab462.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab462.scala))
+
+![](pictures/5-4-max-n.png)
+
+### Wzorzec "trampolina": ([`lab463.scala`](https://github.com/Ehevi/Scala-programming/blob/master/Lab-4/lab463.scala))
+![](pictures/5-6-tailcalls.png)
+
 ## 6. Odwzorowanie `switch - case` (z Javy) w Scali (wariant z typem wyliczeniowym)
 ## 7. Constant patterns (vs. *variable patterns*)
 ## 8. Constructor patterns
@@ -256,4 +274,3 @@ def sumAbsArrayRec3(elems: Array[Int]) = {
 ## 10. Typed patterns
 ## 11. Typ `Option`
 ## 12. Ekstraktory
-#### Zadanie

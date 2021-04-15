@@ -118,42 +118,36 @@ object Appl42 {
     }
 
     def main(args: Array[String]) {
-        
         val a1To5 = (1 to 5).toArray
-        /*
         println("Testing with a1To5 = " + a1To5.mkString("Array(", ", ", ") ..."))
-        */
         var expectResult = 15
-        /*
         checkPredicate(sumArrayIter(a1To5) == expectResult, "sumArrayIter(a1To5) == " + expectResult)
         checkPredicate(sumArrayRec1(0, a1To5) == expectResult, "sumArrayRec1(0, a1To5) == " + expectResult)
         checkPredicate(sumArrayRec2(a1To5) == expectResult, "sumArrayRec2(a1To5) == " + expectResult)
-        */
 
-        /*
+        println("")
         println("Testing with a1To5 = " + a1To5.mkString("Array(", ", ", ") ..."))
         expectResult = 55
         checkPredicate(sumSqrArrayIter(a1To5) == expectResult, "sumSqrArrayIter(a1To5) == " + expectResult)
         checkPredicate(sumSqrArrayRec1(0, a1To5) == expectResult, "sumSqrArrayRec1(0, a1To5) == " + expectResult)
         checkPredicate(sumSqrArrayRec2(a1To5) == expectResult, "sumSqrArrayRec2(a1To5) == " + expectResult)
         checkPredicate(sumSqrArrayRec3(a1To5) == expectResult, "sumSqrArrayRec3(a1To5) == " + expectResult)
-        */
-
-        /*
+        
+        println("")
         println("Testing with a1To5 = " + a1To5.mkString("Array(", ", ", ") ..."))
         expectResult = 120
         checkPredicate(prodArrayIter(a1To5) == expectResult, "prodArrayIter(a1To5) == " + expectResult)
         checkPredicate(prodArrayRec1(0, a1To5) == expectResult, "prodArrayRec1(0, a1To5) == " + expectResult)
         checkPredicate(prodArrayRec2(a1To5) == expectResult, "prodArrayRec2(a1To5) == " + expectResult)
         checkPredicate(prodArrayRec3(a1To5) == expectResult, "prodArrayRec3(a1To5) == " + expectResult)
-        */
-
+        
+        println("")
         val aNegative1To5 = (-5 to -1).toArray
         println("Testing with aNegative1To5 = " + aNegative1To5.mkString("Array(", ", ", ") ..."))
         expectResult = 15
         checkPredicate(sumAbsArrayIter(aNegative1To5) == expectResult, "sumAbsArrayIter(aNegative1To5) == " + expectResult)
         checkPredicate(sumAbsArrayRec1(0, aNegative1To5) == expectResult, "sumAbsArrayRec1(0, aNegative1To5) == " + expectResult)
         checkPredicate(sumAbsArrayRec2(aNegative1To5) == expectResult, "sumAbsArrayRec2(aNegative1To5) == " + expectResult)
-        //checkPredicate(sumAbsArrayRec3(aNegative1To5) == expectResult, "sumAbsArrayRec3(aNegative1To5) == " + expectResult)
+        checkPredicate(sumAbsArrayRec3(aNegative1To5) == expectResult, "sumAbsArrayRec3(aNegative1To5) == " + expectResult)
     }
 }
